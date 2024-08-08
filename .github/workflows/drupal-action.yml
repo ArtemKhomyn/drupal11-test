@@ -1,6 +1,5 @@
 name: CI
 
-# Controls when the workflow will run
 on:
   push:
     branches: [ "main" ]
@@ -24,7 +23,9 @@ jobs:
         run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
       - name: Start a PHP server
-        run: php -S localhost:8000 -t public &
+        run: |
+          php -S localhost:8000 -t public &
+          sleep 10 # Add a delay to ensure the server is up and running
         
       - name: Generate static site
         run: |
